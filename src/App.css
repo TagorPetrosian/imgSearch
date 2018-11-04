@@ -11,13 +11,14 @@ img {
 
 
 .grid {
+  overflow: hidden;
   max-width: 720px;
   margin: auto;
 }
 
 
 .search-bar {
-  transform: translateX(195px);
+  transform: translateX(211px);
   position: relative;
 }
 

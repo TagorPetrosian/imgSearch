@@ -8,13 +8,13 @@ class SearchBar extends Component {
   }
   render() {
     return (
-      <div className="search-bar">
+      <div className="search-bar mb-5">
         <input type="text"
           value={this.state.term}
           onChange={event => this.onInputChange(event.target.value)}
           placeholder="Search"
         />
-        <i class="fas fa-search"></i>
+        <i className="fas fa-search"></i>
       </div>
     );
   }

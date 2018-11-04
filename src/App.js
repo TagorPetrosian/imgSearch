@@ -27,10 +27,12 @@ class App extends Component {
 
   async imageSearch(term) {
     const images = await searchImages(term, { per_page: 9 });
+    if (images) {
+      this.setState({
+        images: images
+      })
+    }
 
-    this.setState({
-      images: images
-    })
   }
   render() {
     const imageSearch = _.debounce(term => {

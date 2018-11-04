@@ -7,7 +7,7 @@ const ImageItem = ({ pageUrl, webformatURL, tags }) => {
         <img src={webformatURL} alt={tags} className="img-responsive" />
       </figure>
       <figcaption className="caption">
-        <i class="fas fa-link"></i></figcaption>
+        <i className="fas fa-link"></i></figcaption>
     </a></div>
   )
 }
