@@ -1,28 +1,51 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import _ from "lodash"
+import React, { Component } from "react";
+import keys from "./config/keys";
+import ImageGrid from "./components/ImageGrid";
+import SearchBar from "./components/SearchBar";
+import { authenticate } from 'pixabay-api';
+import "./App.css";
+import logo from "./images/pixabay-logo.png";
+
+const API_KEY = keys.PIXABAY_API_KEY;
+const { searchImages } = authenticate(API_KEY);
+
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      images: []
+    }
   }
+
+  componentDidMount() {
+    this.imageSearch("mountain");
+  }
+
+  async imageSearch(term) {
+    const images = await searchImages(term, { per_page: 9 });
+
+    this.setState({
+      images: images
+    })
+  }
+  render() {
+    const imageSearch = _.debounce(term => {
+      this.imageSearch(term);
+    }, 300)
+    return (
+      <div className="container">
+        <img src={logo} alt="logo" className="logo mb-5" />
+        <SearchBar onSearchTermChange={imageSearch} />
+        <ImageGrid images={this.state.images} />
+      </div>
+    )
+  }
+
 }
+
 
 export default App;
